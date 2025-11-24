@@ -15,7 +15,7 @@ update_os
 
 setup_uv
 
-msg_info "Installing dependencies"
+msg_info "Установка зависимостей"
 $STD apt install --no-install-recommends -y \
   git \
   redis \
@@ -82,18 +82,18 @@ if [[ "$CTTYPE" == "0" && -d /dev/dri ]]; then
   $STD adduser "$(id -u -n)" video
   $STD adduser "$(id -u -n)" render
 fi
-msg_ok "Dependencies Installed"
+msg_ok "Зависимости установлены"
 
-msg_info "Installing Mise"
+msg_info "Установка Mise"
 curl -fSs https://mise.jdx.dev/gpg-key.pub | tee /etc/apt/keyrings/mise-archive-keyring.pub 1>/dev/null
 echo "deb [signed-by=/etc/apt/keyrings/mise-archive-keyring.pub arch=amd64] https://mise.jdx.dev/deb stable main" | tee /etc/apt/sources.list.d/mise.list
 $STD apt update
 $STD apt install -y mise
-msg_ok "Installed Mise"
+msg_ok "Установка Mise завершена"
 
 read -r -p "${TAB3}Install OpenVINO dependencies for Intel HW-accelerated machine-learning? y/N " prompt
 if [[ ${prompt,,} =~ ^(y|yes)$ ]]; then
-  msg_info "Installing OpenVINO dependencies"
+  msg_info "Установка OpenVINO зависимостей"
   touch ~/.openvino
   $STD apt install -y --no-install-recommends patchelf
   tmp_dir=$(mktemp -d)
@@ -107,7 +107,7 @@ if [[ ${prompt,,} =~ ^(y|yes)$ ]]; then
   $STD popd
   rm -rf "$tmp_dir"
   dpkg -l | grep "intel-opencl-icd" | awk '{print $3}' >~/.intel_version
-  msg_ok "Installed OpenVINO dependencies"
+  msg_ok "Установка OpenVINO завершена"
 fi
 
 msg_info "Configuring Debian Testing Repo"
