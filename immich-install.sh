@@ -22,7 +22,6 @@ PLUGIN_DIR="${APP_DIR}/corePlugin"
 ML_DIR="${APP_DIR}/machine-learning"
 GEO_DIR="${INSTALL_DIR}/geodata"
 
-msg_info "Installing GeoNames data"
 cd "$GEO_DIR"
 curl -fsSLZ -O "https://raw.githubusercontent.com/Artem936c/ProxmoxVE/main/admin1CodesASCII.txt" \
   -O "https://raw.githubusercontent.com/Artem936c/ProxmoxVE/main/admin2Codes.txt" \
@@ -33,13 +32,11 @@ date --iso-8601=seconds | tr -d "\n" >geodata-date.txt
 rm cities500.zip
 cd "$INSTALL_DIR"
 ln -s "$GEO_DIR" "$APP_DIR"
-msg_ok "Installed GeoNames data"
+
 
 mkdir -p /var/log/immich
 touch /var/log/immich/{web.log,ml.log}
-msg_ok "Installed ${APPLICATION}"
 
-msg_info "Modifying user, creating env file, scripts & services"
 usermod -aG video,render immich
 
 cat <<EOF >"${INSTALL_DIR}"/.env
@@ -132,8 +129,3 @@ WantedBy=multi-user.target
 EOF
 chown -R immich:immich "$INSTALL_DIR" /var/log/immich
 systemctl enable -q --now "$APPLICATION"-ml.service "$APPLICATION"-web.service
-msg_ok "Modified user, created env file, scripts and services"
-
-motd_ssh
-customize
-cleanup_lxc
