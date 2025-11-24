@@ -365,7 +365,7 @@ ln -s "$UPLOAD_DIR" "$ML_DIR"/upload
 
 msg_info "Installing GeoNames data"
 cd "$GEO_DIR"
-curl -fsSLZ -O "https://download.geonames.org/export/dump/admin1CodesASCII.txt" \
+curl -fsSLZ -O "https://raw.githubusercontent.com/Artem936c/ProxmoxVE/main/admin1CodesASCII.txt" \
   -O "https://download.geonames.org/export/dump/admin2Codes.txt" \
   -O "https://download.geonames.org/export/dump/cities500.zip" \
   -O "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_admin_0_countries.geojson"
