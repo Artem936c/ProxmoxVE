@@ -5,19 +5,6 @@
 # License: MIT | https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
 # Source: https://immich.app
 
-source /dev/stdin <<<"$FUNCTIONS_FILE_PATH"
-color
-verb_ip6
-catch_errors
-setting_up_container
-network_check
-update_os
-
-setup_uv
-
-msg_info "Установка зависимостей"
-msg_ok "Set up Postgresql Database"
-
 APPLICATION="immich"
 
 LD_LIBRARY_PATH=/usr/local/lib
